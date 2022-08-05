@@ -44,3 +44,17 @@ body {
 button a {
   text-decoration: none;
 }
+
+.update-user-container {
+  padding: 15px;
+  text-align: center;
+}
+
+.update-user-container label {
+  display: block;
+}
+
+.btn-save {
+  margin-top: 15px;
+  cursor: pointer;
+}
