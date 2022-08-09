@@ -58,3 +58,7 @@ button a {
   margin-top: 15px;
   cursor: pointer;
 }
+
+td form {
+  display: inline-block;
+}
