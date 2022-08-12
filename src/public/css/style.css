@@ -64,9 +64,13 @@ td form {
 }
 
 .upload-file-container {
-  padding: 15px;
+  padding: 15px 45px;
 }
 
 .upload-file-container label {
   display: block;
+}
+
+.upload-file-container hr {
+  border: 1px solid rgb(155, 147, 147);
 }

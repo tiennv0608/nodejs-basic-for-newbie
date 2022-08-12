@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
 
   // By default, multer removes file extensions so let's add them back
   filename: function (req, file, cb) {
-    console.log(file);
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -36,6 +35,11 @@ let upload = multer({
   fileFilter: imageFilter,
 });
 
+let uploadMultipleFiles = multer({
+  storage: storage,
+  fileFilter: imageFilter,
+}).array("multiple_images", 2);
+
 const initWebRoute = (app) => {
   router.get("/", homeController.getHomePage);
   router.get("/detail/user/:userId", homeController.getDetailPage);
@@ -49,6 +53,25 @@ const initWebRoute = (app) => {
     "/upload-profile-pic",
     upload.single("profile_pic"),
     homeController.handleUploadFile
+  );
+
+  router.post(
+    "/upload-multiple-images",
+    (req, res, next) => {
+      uploadMultipleFiles(req, res, (err) => {
+        if (
+          err instanceof multer.MulterError &&
+          err.code === "LIMIT_UNEXPECTED_FILE"
+        ) {
+          res.send("LIMIT_UNEXPECTED_FILE");
+        } else if (err) {
+          res.send(err);
+        } else {
+          next();
+        }
+      });
+    },
+    homeController.handleUploadMultipleFiles
   );
 
   router.get("/about", homeController.getAbout);
