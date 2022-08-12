@@ -62,3 +62,11 @@ button a {
 td form {
   display: inline-block;
 }
+
+.upload-file-container {
+  padding: 15px;
+}
+
+.upload-file-container label {
+  display: block;
+}
